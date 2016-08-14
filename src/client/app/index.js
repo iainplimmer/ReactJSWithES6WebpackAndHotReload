@@ -5,10 +5,11 @@ import AwesomeComponent from './AwesomeComponent.js';
 export default class App extends React.Component {
   render () {
     return <div>
-        Getting started with React!! 
+        Getting started with React and Webpack, ES6!! 
         <AwesomeComponent/>
       </div>;
   }
-}
+
+} 
 
 render(<App/>, document.getElementById('app'));

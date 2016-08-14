@@ -1,11 +1,19 @@
 import React from 'react';
 
-class AwesomeComponent extends React.Component {
+export default class AwesomeComponent extends React.Component {
 
   constructor(props) {
     super(props); // Calls the constructor of the parent class
-    this.state = {likesCount : 0};
+    this.state = {
+        likesCount : 0
+    };
     this.onLike = this.onLike.bind(this);
+    this.onDislike = this.onDislike.bind(this);
+  }
+
+  onDislike () {
+    let newLikesCount = this.state.likesCount - 1;
+    this.setState({likesCount: newLikesCount});
   }
 
   onLike () {
@@ -16,12 +24,11 @@ class AwesomeComponent extends React.Component {
   render() {
     return (
       <div>
-        Likes : <span>{this.state.likesCount}</span>
-        <div><button onClick={this.onLike}>Like Me</button></div>
+        You've currently got <span>{this.state.likesCount} likes.</span>
+        <button onClick={this.onLike}>Like</button>
+        <button onClick={this.onDislike}>Dislike</button>
       </div>
     );
   }
 
 }
-
-export default AwesomeComponent;
