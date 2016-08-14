@@ -5,10 +5,14 @@ export default class AwesomeComponent extends React.Component {
   constructor(props) {
     super(props); // Calls the constructor of the parent class
     this.state = {
-        likesCount : 0
+        likesCount : 0        
     };
     this.onLike = this.onLike.bind(this);
     this.onDislike = this.onDislike.bind(this);
+
+    this.props.Books.map(function (c){
+      console.log(c.StarRating, c.BookName, c.BookId);
+    });
   }
 
   onDislike () {

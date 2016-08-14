@@ -42,9 +42,9 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/*!*********************************!*\
-  !*** ./src/client/app/index.js ***!
-  \*********************************/
+/*!************************************************!*\
+  !*** ./resources/app/bookstore.application.js ***!
+  \************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61,9 +61,13 @@
 	
 	var _reactDom = __webpack_require__(/*! react-dom */ 35);
 	
-	var _AwesomeComponent = __webpack_require__(/*! ./AwesomeComponent.js */ 176);
+	var _booklistComponent = __webpack_require__(/*! ./components/booklist.component.js */ 175);
 	
-	var _AwesomeComponent2 = _interopRequireDefault(_AwesomeComponent);
+	var _booklistComponent2 = _interopRequireDefault(_booklistComponent);
+	
+	var _books = __webpack_require__(/*! ./data/books.js */ 176);
+	
+	var _books2 = _interopRequireDefault(_books);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -73,34 +77,43 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var App = function (_React$Component) {
-	  _inherits(App, _React$Component);
+	var BookstoreApp = function (_React$Component) {
+	  _inherits(BookstoreApp, _React$Component);
 	
-	  function App() {
-	    _classCallCheck(this, App);
+	  function BookstoreApp() {
+	    _classCallCheck(this, BookstoreApp);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(BookstoreApp).apply(this, arguments));
 	  }
 	
-	  _createClass(App, [{
+	  _createClass(BookstoreApp, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'Getting started with React!!',
-	        _react2.default.createElement(_AwesomeComponent2.default, null)
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Welcome to the bookstore'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Have a look at some of the books that we have here.'
+	        ),
+	        _react2.default.createElement(_booklistComponent2.default, { Books: _books2.default })
 	      );
 	    }
 	  }]);
 	
-	  return App;
+	  return BookstoreApp;
 	}(_react2.default.Component);
 	
-	exports.default = App;
+	exports.default = BookstoreApp;
 	
 	
-	(0, _reactDom.render)(_react2.default.createElement(App, null), document.getElementById('app'));
+	(0, _reactDom.render)(_react2.default.createElement(BookstoreApp, null), document.getElementById('BookstoreApp'));
 
 /***/ },
 /* 1 */
@@ -22031,11 +22044,156 @@
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
-/* 175 */,
+/* 175 */
+/*!********************************************************!*\
+  !*** ./resources/app/components/booklist.component.js ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _booklistRowComponent = __webpack_require__(/*! ./booklist.row.component.js */ 177);
+	
+	var _booklistRowComponent2 = _interopRequireDefault(_booklistRowComponent);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var BooklistComponent = function (_React$Component) {
+	  _inherits(BooklistComponent, _React$Component);
+	
+	  function BooklistComponent(props) {
+	    _classCallCheck(this, BooklistComponent);
+	
+	    // Calls the constructor of the parent class
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BooklistComponent).call(this, props));
+	
+	    _this.state = {
+	      Books: _this.props.Books
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(BooklistComponent, [{
+	    key: 'render',
+	    value: function render() {
+	
+	      var bookRows = [];
+	      this.state.Books.map(function (_book) {
+	        bookRows.push(_react2.default.createElement(_booklistRowComponent2.default, { key: _book.BookId, Book: _book }));
+	      });
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        'You\'ve currently got ',
+	        _react2.default.createElement(
+	          'span',
+	          null,
+	          this.state.Books.length,
+	          ' books.'
+	        ),
+	        _react2.default.createElement(
+	          'table',
+	          null,
+	          _react2.default.createElement(
+	            'thead',
+	            null,
+	            _react2.default.createElement(
+	              'tr',
+	              null,
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                'Name'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                'ISBN'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                'Price'
+	              ),
+	              _react2.default.createElement(
+	                'th',
+	                null,
+	                'Star Rating'
+	              ),
+	              _react2.default.createElement('th', null)
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'tbody',
+	            null,
+	            bookRows
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return BooklistComponent;
+	}(_react2.default.Component);
+	
+	exports.default = BooklistComponent;
+
+/***/ },
 /* 176 */
-/*!********************************************!*\
-  !*** ./src/client/app/AwesomeComponent.js ***!
-  \********************************************/
+/*!*************************************!*\
+  !*** ./resources/app/data/books.js ***!
+  \*************************************/
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	var Books = [{
+	    "BookId": 103,
+	    "BookName": "The Damned United",
+	    "ISBN": "isbn-99921-58-10-7",
+	    "ReleaseDate": "May 21, 2016",
+	    "Price": 9.99,
+	    "StarRating": 3
+	}, {
+	    "BookId": 102,
+	    "BookName": "The Blade Itself",
+	    "ISBN": "isbn-23431-28-10-7",
+	    "ReleaseDate": "April 1, 2010",
+	    "Price": 8.99,
+	    "StarRating": 3
+	}, {
+	    "BookId": 101,
+	    "BookName": "A Feast for Crows",
+	    "ISBN": "isbn-54561-54-12-4",
+	    "ReleaseDate": "January 12, 2005",
+	    "Price": 4.99,
+	    "StarRating": 4
+	}];
+	
+	module.exports = Books;
+
+/***/ },
+/* 177 */
+/*!************************************************************!*\
+  !*** ./resources/app/components/booklist.row.component.js ***!
+  \************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22058,55 +22216,60 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var AwesomeComponent = function (_React$Component) {
-	  _inherits(AwesomeComponent, _React$Component);
+	var BooklistRowComponent = function (_React$Component) {
+	  _inherits(BooklistRowComponent, _React$Component);
 	
-	  function AwesomeComponent(props) {
-	    _classCallCheck(this, AwesomeComponent);
+	  function BooklistRowComponent(props) {
+	    _classCallCheck(this, BooklistRowComponent);
 	
 	    // Calls the constructor of the parent class
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AwesomeComponent).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BooklistRowComponent).call(this, props));
 	
-	    _this.state = { likesCount: 0 };
-	    _this.onLike = _this.onLike.bind(_this);
+	    _this.state = {
+	      Book: _this.props.Book
+	    };
 	    return _this;
 	  }
 	
-	  _createClass(AwesomeComponent, [{
-	    key: 'onLike',
-	    value: function onLike() {
-	      var newLikesCount = this.state.likesCount + 1;
-	      this.setState({ likesCount: newLikesCount });
-	    }
-	  }, {
+	  _createClass(BooklistRowComponent, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
+	        'tr',
 	        null,
-	        'Likes : ',
 	        _react2.default.createElement(
-	          'span',
+	          'td',
 	          null,
-	          this.state.likesCount
+	          this.state.Book.BookName
 	        ),
 	        _react2.default.createElement(
-	          'div',
+	          'td',
 	          null,
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.onLike },
-	            'Like Me'
-	          )
+	          this.state.Book.ISBN
+	        ),
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          this.state.Book.Price
+	        ),
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          this.state.Book.StarRating
+	        ),
+	        _react2.default.createElement(
+	          'td',
+	          null,
+	          'SPARE COLUMN'
 	        )
 	      );
 	    }
 	  }]);
 	
-	  return AwesomeComponent;
+	  return BooklistRowComponent;
 	}(_react2.default.Component);
 	
-	exports.default = AwesomeComponent;
+	exports.default = BooklistRowComponent;
 
 /***/ }
 /******/ ]);
