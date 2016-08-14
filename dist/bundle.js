@@ -22136,8 +22136,7 @@
 	                'th',
 	                null,
 	                'Star Rating'
-	              ),
-	              _react2.default.createElement('th', null)
+	              )
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -22208,6 +22207,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _ratingComponent = __webpack_require__(/*! ./rating.component.js */ 179);
+	
+	var _ratingComponent2 = _interopRequireDefault(_ratingComponent);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22255,12 +22258,7 @@
 	        _react2.default.createElement(
 	          'td',
 	          null,
-	          this.state.Book.StarRating
-	        ),
-	        _react2.default.createElement(
-	          'td',
-	          null,
-	          'SPARE COLUMN'
+	          _react2.default.createElement(_ratingComponent2.default, { StarRating: this.state.Book.StarRating })
 	        )
 	      );
 	    }
@@ -22270,6 +22268,101 @@
 	}(_react2.default.Component);
 	
 	exports.default = BooklistRowComponent;
+
+/***/ },
+/* 178 */,
+/* 179 */
+/*!******************************************************!*\
+  !*** ./resources/app/components/rating.component.js ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RatingComponent = function (_React$Component) {
+	  _inherits(RatingComponent, _React$Component);
+	
+	  function RatingComponent(props) {
+	    _classCallCheck(this, RatingComponent);
+	
+	    var MAX_RATING = 5;
+	    var MIN_RATING = 0;
+	
+	    // Calls the constructor of the parent class
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RatingComponent).call(this, props));
+	
+	    _this.state = {
+	      StarRating: _this.props.StarRating
+	    };
+	
+	    _this.IncreaseRating = function (b) {
+	      var newRating = this.state.StarRating + 1;
+	      if (newRating > MAX_RATING) {
+	        newRating = MAX_RATING;
+	      }
+	      this.setState({ StarRating: newRating });
+	    };
+	
+	    _this.DecreaseRating = function (b) {
+	      var newRating = this.state.StarRating - 1;
+	      if (newRating > MIN_RATING) {
+	        newRating = MIN_RATING;
+	      }
+	      this.setState({ StarRating: newRating });
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(RatingComponent, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.state.StarRating,
+	        ' Stars!',
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: function onClick() {
+	              return _this2.IncreaseRating();
+	            } },
+	          '+'
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: function onClick() {
+	              return _this2.DecreaseRating();
+	            } },
+	          '-'
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return RatingComponent;
+	}(_react2.default.Component);
+	
+	exports.default = RatingComponent;
 
 /***/ }
 /******/ ]);

@@ -1,4 +1,5 @@
 import React from 'react';
+import RatingComponent from './rating.component.js';
 
 export default class BooklistRowComponent extends React.Component {
 
@@ -15,9 +16,8 @@ export default class BooklistRowComponent extends React.Component {
         <td>{this.state.Book.BookName}</td>
         <td>{this.state.Book.ISBN}</td>
         <td>{this.state.Book.Price}</td>
-        <td>{this.state.Book.StarRating}</td>
-        <td>
-          SPARE COLUMN
+        <td>          
+          <RatingComponent StarRating={this.state.Book.StarRating} />
         </td>
       </tr>
     );

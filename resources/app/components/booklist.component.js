@@ -27,7 +27,6 @@ export default class BooklistComponent extends React.Component {
               <th>ISBN</th>
               <th>Price</th>
               <th>Star Rating</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
