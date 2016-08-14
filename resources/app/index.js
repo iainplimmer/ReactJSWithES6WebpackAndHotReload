@@ -5,7 +5,7 @@ import AwesomeComponent from './AwesomeComponent.js';
 export default class App extends React.Component {
   render () {
     return <div>
-        Getting started with React and Webpack, ES6!! 
+        Getting started with React, Webpack & ES6!!!!!!! 
         <AwesomeComponent/>
       </div>;
   }
