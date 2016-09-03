@@ -20,21 +20,13 @@ class RatingComponent extends React.Component {
       this.setState({StarRating: newRating}); 
     }
 
-    this.DecreaseRating = function (b) {
-      let newRating = this.state.StarRating - 1;
-      if (newRating < MIN_RATING) {
-        newRating = MIN_RATING;
-      }
-      this.setState({ StarRating: newRating });
-    }
   }
 
   render() {
     return (
-      <div>        
-        <button onClick={() => this.IncreaseRating()}>+</button>
+      <div>                
         {this.state.StarRating}
-        <button onClick={() => this.DecreaseRating()}>-</button>
+        <button onClick={() => this.IncreaseRating()}>+</button>
       </div>
     );
   }
