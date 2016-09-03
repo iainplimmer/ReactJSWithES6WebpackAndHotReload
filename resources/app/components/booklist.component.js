@@ -2,44 +2,32 @@ import React from 'react';
 import BooklistRowComponent from './booklist.row.component.js';
 import NewBookComponent from './newbook.component.js';
 import AverageRatingComponent from './averagerating.component.js';
+import axios from 'axios';
 
 class BooklistComponent extends React.Component {
 
   constructor(props) {
-    super(props); // Calls the constructor of the parent class
-    this.state = {
-        Books : []      
-    };
+      super(props); // Calls the constructor of the parent class
+      this.state = {
+          Books : []      
+      }; // Equiv of getInitialState
 
-    let self = this;
+      let self = this;
 
-    axios.get('http://localhost:3333/')
-    .then(function (response) {
-        self.setState({
-          Books : self.state.Books.concat(response.data)
-        });
-        console.log('meee')
-    });
-
-
+      axios.get('http://localhost:3333/')
+      .then(function (response) {
+          self.setState({
+            Books : response.data
+          });
+      });
 
   }
 
   _handleChange (a) {
-
-    let newbook = {
-        "BookId": 105,
-        "BookName": "Harry Potter and the Deathly Hallows",
-        "ISBN": "isbn-23432-23-12-2",
-        "ReleaseDate": "December 23, 2016",
-        "Price": 2.99,
-        "StarRating": 4
-    }
-    
+    //  Let's add an example book here.   
     this.setState({
-      Books : this.state.Books.concat([newbook])  
+      Books : this.state.Books.concat({ "BookId": 105, "BookName": "Life", "ISBN": "isbn-12457-87-56-4", "ReleaseDate": "December 25, 2002", "Price": 1.99, "StarRating": 1 })  
     });
-
   }
 
   render() {
