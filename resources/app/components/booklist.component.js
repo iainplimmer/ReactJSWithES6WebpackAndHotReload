@@ -8,8 +8,21 @@ class BooklistComponent extends React.Component {
   constructor(props) {
     super(props); // Calls the constructor of the parent class
     this.state = {
-        Books : this.props.Books      
+        Books : []      
     };
+
+    let self = this;
+
+    axios.get('http://localhost:3333/')
+    .then(function (response) {
+        self.setState({
+          Books : self.state.Books.concat(response.data)
+        });
+        console.log('meee')
+    });
+
+
+
   }
 
   _handleChange (a) {

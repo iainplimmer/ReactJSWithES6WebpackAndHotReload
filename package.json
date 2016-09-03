@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently 'lite-server' 'webpack -d --watch'",
+    "start": "concurrently 'lite-server' 'webpack -d --watch' 'node resources/server/data.js'",
     "build": "webpack -p"
   },
   "author": "Iain Plimmer",
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "concurrently": "^2.2.0",
-    "lite-server": "^2.2.2"
+    "lite-server": "^2.2.2",
+    "express": "^4.13.4"
   }
 }
