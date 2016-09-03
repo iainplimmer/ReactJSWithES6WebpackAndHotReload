@@ -1,7 +1,9 @@
 import React from 'react';
 import BooklistRowComponent from './booklist.row.component.js';
+import NewBookComponent from './newbook.component.js';
+import AverageRatingComponent from './averagerating.component.js';
 
-export default class BooklistComponent extends React.Component {
+class BooklistComponent extends React.Component {
 
   constructor(props) {
     super(props); // Calls the constructor of the parent class
@@ -10,16 +12,34 @@ export default class BooklistComponent extends React.Component {
     };
   }
 
-  render() {
+  _handleChange (a) {
 
-      var bookRows = [];
-      this.state.Books.map(function (_book) {
-          bookRows.push(<BooklistRowComponent key={_book.BookId} Book={_book} />);
-      });
+    let newbook = {
+        "BookId": 105,
+        "BookName": "Harry Potter and the Deathly Hallows",
+        "ISBN": "isbn-23432-23-12-2",
+        "ReleaseDate": "December 23, 2016",
+        "Price": 2.99,
+        "StarRating": 4
+    }
+    
+    this.setState({
+      Books : this.state.Books.concat([newbook])  
+    });
+
+  }
+
+  render() {
+    var bookRows = [];
+    this.state.Books.map(function (_book) {
+        bookRows.push(<BooklistRowComponent key={_book.BookId} Book={_book} />);
+    });
 
     return (
       <div>
-        You've currently got <span>{this.state.Books.length} books.</span>
+        
+        <p>You've currently got <span>{this.state.Books.length} books.</span></p>
+        
         <table>
           <thead>
             <tr>
@@ -33,8 +53,14 @@ export default class BooklistComponent extends React.Component {
             {bookRows}
           </tbody>
         </table>
+
+        <AverageRatingComponent />
+
+        <NewBookComponent clickMe={this._handleChange.bind(this)} />
       </div>
     );
   }
 
 }
+
+export default BooklistComponent;

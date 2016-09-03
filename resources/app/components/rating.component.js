@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class RatingComponent extends React.Component {
+class RatingComponent extends React.Component {
 
   constructor(props) {
 
@@ -22,7 +22,7 @@ export default class RatingComponent extends React.Component {
 
     this.DecreaseRating = function (b) {
       let newRating = this.state.StarRating - 1;
-      if (newRating > MIN_RATING) {
+      if (newRating < MIN_RATING) {
         newRating = MIN_RATING;
       }
       this.setState({ StarRating: newRating });
@@ -31,12 +31,14 @@ export default class RatingComponent extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.StarRating} Stars!
+      <div>        
         <button onClick={() => this.IncreaseRating()}>+</button>
+        {this.state.StarRating}
         <button onClick={() => this.DecreaseRating()}>-</button>
       </div>
     );
   }
 
 }
+
+export default RatingComponent
