@@ -48,10 +48,17 @@ class BooklistComponent extends React.Component {
   }
 
   CreateBook (a) {
-    //  Let's add an example book here.   
+
+    let allBooks = this.state.Books.concat({ "BookId": 105, "BookName": "Life", "ISBN": "isbn-12457-87-56-4", "ReleaseDate": "December 25, 2002", "Price": 1.99, "StarRating": 1 })
+    let averageRating = this.CalculateAverageRating(allBooks)
+
+    //  Let's add an example book here. It seems that you can only set state ONCE on the function, and it's not applied until the 
+    //  whole state has been rendered to the page 
     this.setState({
-      Books : this.state.Books.concat({ "BookId": 105, "BookName": "Life", "ISBN": "isbn-12457-87-56-4", "ReleaseDate": "December 25, 2002", "Price": 1.99, "StarRating": 1 })  
+      Books : allBooks,
+      AverageRating : averageRating  
     });
+    
   }
 
   render() {
