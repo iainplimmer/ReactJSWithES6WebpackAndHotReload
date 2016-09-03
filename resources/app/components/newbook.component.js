@@ -8,7 +8,7 @@ class NewBookComponent extends React.Component {
   render() {
 
     return (
-      <button onClick={() => this.props.clickMe()}>
+      <button onClick={() => this.props.CreateBook()}>
         Create Book
       </button>
     );

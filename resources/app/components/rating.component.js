@@ -3,22 +3,17 @@ import React from 'react';
 class RatingComponent extends React.Component {
 
   constructor(props) {
-
-    super(props); // Calls the constructor of the parent class
-    this.state = {
-        StarRating : this.props.StarRating       
-    };
-
+    super(props); // Calls the constructor of the parent class 
     this.IncreaseRating = function (b) {
-      this.setState({StarRating: this.state.StarRating+1}); 
+      this.props.Book.StarRating = this.props.Book.StarRating+1;
+      this.props.ChangeRating(this.props.Book); 
     }
-
   }
 
   render() {
     return (
       <div>                
-        <b>{this.state.StarRating}</b>
+        <b>{this.props.Book.StarRating}</b>
         <button onClick={() => this.IncreaseRating()}>+</button>
       </div>
     );

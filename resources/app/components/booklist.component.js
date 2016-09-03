@@ -6,24 +6,48 @@ import axios from 'axios';
 
 class BooklistComponent extends React.Component {
 
+
+
   constructor(props) {
       super(props); // Calls the constructor of the parent class
       this.state = {
-          Books : []      
+          Books : [],
+          AverageRating: 0      
       }; // Equiv of getInitialState
 
-      let self = this;
+      this.ChangeRating = this.ChangeRating.bind(this);
 
+      let self = this;
       axios.get('http://localhost:3333/')
       .then(function (response) {
+          let averageRating = self.CalculateAverageRating(response.data);
           self.setState({
-            Books : response.data
-          });
+            Books : response.data,
+            AverageRating : averageRating
+          });        
+
       });
 
   }
 
-  _handleChange (a) {
+  CalculateAverageRating (books) {
+      let totalRating = 0;
+      books.map(function (item){
+          totalRating = totalRating + item.StarRating;
+      })
+      return totalRating / books.length;
+  }
+
+  ChangeRating (book) {   
+    let averageRating = this.CalculateAverageRating(this.state.Books)
+    this.setState({
+      Books : this.state.Books,
+      AverageRating : averageRating
+    });    
+    
+  }
+
+  CreateBook (a) {
     //  Let's add an example book here.   
     this.setState({
       Books : this.state.Books.concat({ "BookId": 105, "BookName": "Life", "ISBN": "isbn-12457-87-56-4", "ReleaseDate": "December 25, 2002", "Price": 1.99, "StarRating": 1 })  
@@ -32,8 +56,9 @@ class BooklistComponent extends React.Component {
 
   render() {
     var bookRows = [];
-    this.state.Books.map(function (_book) {
-        bookRows.push(<BooklistRowComponent key={_book.BookId} Book={_book} />);
+    var self = this;
+    self.state.Books.map(function (_book) {
+        bookRows.push(<BooklistRowComponent ChangeRating={self.ChangeRating.bind(this)} key={_book.BookId} Book={_book} />);
     });
 
     return (
@@ -55,9 +80,9 @@ class BooklistComponent extends React.Component {
           </tbody>
         </table>
 
-        <AverageRatingComponent />
+        <AverageRatingComponent AverageRating={this.state.AverageRating} />
 
-        <NewBookComponent clickMe={this._handleChange.bind(this)} />
+        <NewBookComponent CreateBook={this.CreateBook.bind(this)} />
       </div>
     );
   }

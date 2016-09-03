@@ -8,7 +8,7 @@ class AverageRatingComponent extends React.Component {
   render() {
 
     return (
-      <div>Average Rating: </div>
+      <div>Average Rating: {this.props.AverageRating}</div>
     );
   }
 
